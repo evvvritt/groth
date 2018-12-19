@@ -1,11 +1,14 @@
 <template lang="pug">
   article
+    work-landscape(:works="works")
 </template>
 
 <script>
+import WorkLandscape from '@/components/Work--Landscape'
 import _get from 'lodash/get'
 export default {
   name: 'Home',
+  components: { WorkLandscape },
   data () {
     return {
       works: null,
@@ -16,12 +19,13 @@ export default {
     getHome () {
       this.$prismic.client.getSingle('home')
         .then(doc => {
-          const ids = [_get(doc, 'data.work.id'), _get(doc, 'data.cv.id')]
-          if (!ids.length < 2) console.warn('Work or CV doc missing')
+          const id = key => _get(doc, 'data.' + key + '.id')
+          const ids = [id('work'), id('cv')]
           // get Work and CV doc
           this.$prismic.client.getByIDs(ids).then(docs => {
             this.works = this.findDoc(docs.results, 'work')
             this.cv = this.findDoc(docs.results, 'cv')
+            console.log(this.works)
           })
         })
         .catch(console.error)
