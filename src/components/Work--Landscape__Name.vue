@@ -1,6 +1,6 @@
 <template lang="pug">
-  .absolute.pin.flex.items-center.justify-center
-    h1 {{data}}
+  .absolute.pin.flex.items-center.justify-center(:class="'bg-' + data.theme")
+    h1(:class="data.theme === 'black' ? 'text-white' : null") {{data.text}}
 </template>
 
 <script>
