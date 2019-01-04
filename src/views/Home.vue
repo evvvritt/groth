@@ -1,6 +1,6 @@
 <template lang="pug">
   article
-    work-landscape(:works="works")
+    work-landscape(:works="works && works.body")
 </template>
 
 <script>
