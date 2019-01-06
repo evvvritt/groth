@@ -4,6 +4,7 @@
     padding:0;
     box-sizing: border-box;
     border-style:solid;
+    -webkit-tap-highlight-color: transparent;
     /*border-width:1px;*/
   }
 }
@@ -25,4 +26,8 @@ a{
 h1,h2,h3,h4,h5,h6{
   font-size: inherit;
   font-weight: inherit;
+}
+
+button:focus{
+  outline:none;
 }

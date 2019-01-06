@@ -45,13 +45,13 @@ let colors = {
   'transparent': 'transparent',
 
   'black': 'black', // '#22292f',
-  // 'grey-darkest': '#3d4852',
-  // 'grey-darker': '#606f7b',
+  'grey-darkest': '#3d4852',
+  'grey-darker': '#606f7b',
   'grey-dark': '#8795a1',
-  // 'grey': '#b8c2cc',
-  // 'grey-light': '#dae1e7',
-  // 'grey-lighter': '#f1f5f8',
-  // 'grey-lightest': '#f8fafc',
+  'grey': '#b8c2cc',
+  'grey-light': '#dae1e7',
+  'grey-lighter': '#f1f5f8',
+  'grey-lightest': '#f8fafc',
   'white': '#ffffff'
 }
 
@@ -92,7 +92,7 @@ module.exports = {
   */
 
   screens: {
-    'sm': '576px',
+    'sm': '541px',
     'md': '768px',
     'lg': '992px',
     'xl': '1200px'
@@ -448,7 +448,8 @@ module.exports = {
     '48': '12rem',
     '64': '16rem',
     'full': '100%',
-    'screen': '100vh'
+    'screen': '100vh',
+    '50vh': '50vh'
   },
 
   /*
@@ -573,7 +574,8 @@ module.exports = {
     '16': '4rem',
     '20': '5rem',
     '24': '6rem',
-    '32': '8rem'
+    '32': '8rem',
+    '5vmx': '5vmax'
   },
 
   /*
@@ -687,6 +689,7 @@ module.exports = {
 
   zIndex: {
     'auto': 'auto',
+    'neg1': -1,
     '0': 0,
     '10': 10,
     '20': 20,
@@ -788,12 +791,12 @@ module.exports = {
     borderStyle: false,
     borderWidths: [],
     cursor: [],
-    display: [],
+    display: ['responsive'],
     flexbox: ['responsive'],
     float: false,
     fonts: false,
     fontWeights: false,
-    height: [],
+    height: ['responsive'],
     leading: false,
     lists: false,
     margin: [],
@@ -804,12 +807,12 @@ module.exports = {
     negativeMargin: false,
     objectFit: false,
     objectPosition: false,
-    opacity: false,
+    opacity: [],
     outline: false,
     overflow: [],
-    padding: [],
-    pointerEvents: false,
-    position: [],
+    padding: ['responsive'],
+    pointerEvents: [],
+    position: ['responsive'],
     resize: false,
     shadows: false,
     svgFill: false,
@@ -843,10 +846,17 @@ module.exports = {
   */
 
   plugins: [
-    require('tailwindcss/plugins/container')({
-      // center: true,
-      // padding: '1rem',
-    })
+    function ({ addUtilities }) {
+      const newUtils = {
+        '.translx-100': {
+          transform: 'translateX(100%)'
+        },
+        '.translx_-100': {
+          transform: 'translateX(-100%)'
+        }
+      }
+      addUtilities(newUtils, ['responsive'])
+    }
   ],
 
   /*

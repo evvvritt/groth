@@ -1,58 +1,85 @@
 <template lang="pug">
-  section.relative.flex.justify-between.bg-white.cursor-pointer.select-none
+  section.relative.flex.justify-between.bg-white.h-screen.overflow-hidden
+    //- divider
+    .hidden.sm-block.h-screen.absolute.w--50.pin-r.pin-t.pointer-events-none.border-l.border-grey-lighter
     //- verso
-    figure.h-screen.relative(@click="versoClick", v-show="portrait !== 'recto'")
+    figure.h-screen.relative.hidden.sm-block(v-show="portrait !== 'recto'")
       transition(name="leaf")
-        component(:is="verso.type", :data="verso.data", :key="verso.index")
+        component(:is="verso.type", :data="verso.data", :key="verso.index", @click="versoClick")
+      //- caption
+      transition(name="leaf")
+        work-caption.absolute.w-full.z-10.pin-b.pin-l.h-50vh.sm-h-screen.sm-translx-100.bg-black(v-if="caption === 'verso'", :text="verso.data.primary.title", @close="closeCaption")
+      //- caption toggle
+      nav.absolute.w-full.pin-l.pin-b.text-center.text-m
+        button.p-6.inline-block(@click.stop="caption = 'verso'", v-show="hasCaption('verso')") &hellip;
+      //- pg number
+      .absolute.p-6.pin-l.pin-b.text-xs {{verso.index + 1}}
     //- recto
-    figure.h-screen.relative.border-l.border-grey-dark(@click="rectoClick", v-show="portrait !== 'verso'")
+    figure.h-screen.relative(v-show="portrait !== 'verso'")
       transition(name="leaf")
-        component(:is="recto.type", :data="recto.data", :key="recto.index")
+        component(:is="recto.type", :data="recto.data", :key="recto.index", :borderLeft="true", @click="rectoClick")
+      //- caption
+      transition(name="leaf")
+        work-caption.absolute.w-full.z-10.pin-b.pin-l.h-50vh.sm-h-screen.sm-translx_-100.bg-black(v-if="caption === 'recto'", :text="recto.data.primary.title", @close="closeCaption")
+      //- caption toggle
+      nav.absolute.w-full.pin-l.pin-b.text-center.text-m
+        button.p-6.inline-block(@click.stop="caption = 'recto'", v-show="hasCaption('recto')") &hellip;
+      //- pg number
+      .absolute.p-6.pin-r.pin-b.text-xs {{recto.index + 1}}
 </template>
 
 <script>
 import name from './Work--Landscape__Name'
 import leaf from './Work--Landscape__Leaf'
+import workCaption from './Work--Landscape__Leaf__Caption'
 import { getRandomInt } from '@/utils'
+import _get from 'lodash/get'
 const newLeaf = (type, data, i) => { return { type: type, data: data, index: i } }
+const loadedPortrait = window.innerWidth < window.innerHeight
+const full = newLeaf('name', { text: 'Patrick Groth', theme: 'black' }, -1)
 const first = newLeaf('name', { text: 'Patrick', theme: 'black' }, -1)
 const last = newLeaf('name', { text: 'Groth', theme: 'black' }, -2)
 export default {
   name: 'Work--Landscape',
   props: ['works'],
-  components: { name, leaf },
+  components: { name, leaf, workCaption },
   data () {
     return {
       verso: first,
-      recto: last,
-      isPortrait: window.innerWidth < window.innerHeight,
+      recto: loadedPortrait ? full : last,
+      isPortrait: loadedPortrait,
       portrait: null,
-      afterResize: null
+      afterResize: null,
+      caption: null
     }
   },
   methods: {
+    hasCaption (side) {
+      const title = _get(this[side], 'data.primary.title')
+      return title && title.length > 0
+    },
+    closeCaption () {
+      this.caption = null
+    },
     versoClick () {
+      if (this.caption) return this.closeCaption()
       this.next('verso')
     },
     rectoClick () {
+      if (this.caption) return this.closeCaption()
       this.next('recto')
     },
-    spreadClick () {
-
-    },
     next (assignTo) {
+      this.closeCaption()
       const index = getRandomInt(0, this.works.length)
       const work = this.works[index]
       const inUse = index === this.verso.index || index === this.recto.index
-      if (inUse && assignTo === 'verso') this.verso = first
-      else if (inUse && assignTo === 'recto') this.recto = last
-      else {
-        this[assignTo] = newLeaf('leaf', work, index)
-        // after leaf transition
-        setTimeout(() => {
-          this.portrait = this.isPortrait ? assignTo : null
-        }, 100)
-      }
+      if (inUse) return this.next(assignTo)
+      this[assignTo] = newLeaf('leaf', work, index)
+      // after leaf transition
+      setTimeout(() => {
+        this.portrait = this.isPortrait ? assignTo : null
+      }, 100)
     },
     onResize () {
       clearTimeout(this.afterResize)
@@ -80,5 +107,12 @@ export default {
 <style scoped>
 figure{
   flex:1 0 50%;
+  .no-touchevents & nav{
+    opacity:0;
+    transition:opacity 500ms;
+  }
+  .no-touchevents &:hover nav{
+    opacity:1;
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 <template lang="pug">
-  .leaf.absolute.pin.flex.items-center.justify-center.bg-cover.bg-center(:style="bleedStyle", :role="isBleed ? 'img' : 'none'")
+  .leaf.absolute.pin.flex.items-center.justify-center.bg-cover.bg-center.cursor-pointer.px-8.md-px-5vmx(@click="$emit('click')", :style="bleedStyle", :role="isBleed ? 'img' : 'none'")
     //- non-bleed
     .bg-no-repeat.bg-center.pb-100pct.bg-contain.w-full(v-if="!isBleed", role="img", :style="imgStyle")
 </template>
@@ -19,7 +19,8 @@ export default {
     bleedStyle () {
       if (!this.isBleed) return
       return {
-        backgroundImage: this.bgImg
+        backgroundImage: this.bgImg,
+        backgroundPosition: this.$prismic.richTextAsPlain(this.data.primary.bgpos)
       }
     },
     imgStyle () {
@@ -30,10 +31,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.leaf{
-  padding-left:5vmax;
-  padding-right:5vmax;
-}
-</style>

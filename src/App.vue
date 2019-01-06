@@ -4,6 +4,7 @@
 </template>
 
 <script>
+import '@/custom.modernizr'
 import '@/style/_main.css'
 import Home from '@/views/Home'
 export default {

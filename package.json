@@ -41,6 +41,7 @@
       "parser": "babel-eslint"
     }
   },
+  "eslintIgnore": ["custom.modernizr.js"],
   "postcss": {
     "plugins": {
       "postcss-import": {},
