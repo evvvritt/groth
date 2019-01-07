@@ -1,6 +1,9 @@
 <template lang="pug">
   article
     work-landscape(:works="works && works.body")
+    footer.w-full.bg-black.text-white.flex.items-center.justify-center.border-t.border-grey-darkest
+      .flex-1.py-20
+        button.block.m-auto.cursor-pointer.p-6 CV
 </template>
 
 <script>

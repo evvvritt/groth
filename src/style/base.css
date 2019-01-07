@@ -11,7 +11,7 @@
 
 html{
   font-size:10px;
-  /*background-color:lightgrey;*/
+  background-color:black;
 }
 
 body{
@@ -28,6 +28,9 @@ h1,h2,h3,h4,h5,h6{
   font-weight: inherit;
 }
 
-button:focus{
-  outline:none;
+button{
+  color:inherit;
+  &:focus{
+    outline:none;  
+  }
 }

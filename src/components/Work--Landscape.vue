@@ -1,5 +1,5 @@
 <template lang="pug">
-  section.relative.flex.justify-between.bg-white.h-screen.overflow-hidden
+  section.works.relative.flex.justify-between.bg-white.h-screen.overflow-hidden
     //- divider
     .hidden.sm-block.h-screen.absolute.w--50.pin-r.pin-t.pointer-events-none.border-l.border-grey-lighter
     //- verso
@@ -104,14 +104,14 @@ export default {
 .leaf-enter, .leaf-leave-to{opacity:0;}
 </style>
 
-<style scoped>
-figure{
+<style>
+.works figure{
   flex:1 0 50%;
-  .no-touchevents & nav{
+  @nest .no-touchevents & nav{
     opacity:0;
     transition:opacity 500ms;
   }
-  .no-touchevents &:hover nav{
+  @nest .no-touchevents &:hover nav{
     opacity:1;
   }
 }
