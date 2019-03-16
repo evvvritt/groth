@@ -1,15 +1,13 @@
 <template lang="pug">
   #app
-    router-view
+    router-view(:key="$route.path")
 </template>
 
 <script>
 import '@/custom.modernizr'
 import '@/style/_main.css'
-import Home from '@/views/Home'
 export default {
-  name: 'app',
-  components: { Home }
+  name: 'app'
 }
 </script>
 

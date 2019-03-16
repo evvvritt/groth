@@ -43,6 +43,7 @@ View the full documentation at https://tailwindcss.com.
 
 let colors = {
   'transparent': 'transparent',
+  'inherit': 'inherit',
 
   'black': 'black', // '#22292f',
   'grey-darkest': '#3d4852',
@@ -488,9 +489,11 @@ module.exports = {
   */
 
   minHeight: {
-    '0': '0',
-    'full': '100%',
-    'screen': '100vh'
+    // '0': '0',
+    '48': '12rem',
+    '56': '14rem'
+    // 'full': '100%',
+    // 'screen': '100vh'
   },
 
   /*
@@ -803,7 +806,7 @@ module.exports = {
     margin: [],
     maxHeight: false,
     maxWidth: false,
-    minHeight: false,
+    minHeight: ['responsive'],
     minWidth: false,
     negativeMargin: false,
     objectFit: false,

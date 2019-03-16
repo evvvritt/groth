@@ -1,15 +1,18 @@
 <template lang="pug">
   article(v-if="album")
     viewer(:leaves="album.body", :title="[album.title_left, album.title_right]")
+    footer
+      footnotes(:notes="album.footnotes")
 </template>
 
 <script>
 import Viewer from '@/components/Viewer'
+import Footnotes from '@/components/Footnotes'
 import _get from 'lodash/get'
 export default {
   name: 'Album',
   props: ['slug'],
-  components: { Viewer },
+  components: { Viewer, Footnotes },
   data () {
     return {
       album: null
