@@ -1,17 +1,17 @@
 <template lang="pug">
   article
-    work-landscape(:works="works && works.body")
+    //- work-landscape(:works="works && works.body")
     footer.w-full.bg-black.text-white.flex.items-center.justify-center.border-t.border-grey-darkest
       .flex-1.py-20
         button.block.m-auto.cursor-pointer.p-6 CV
 </template>
 
 <script>
-import WorkLandscape from '@/components/Work--Landscape'
+// import WorkLandscape from '@/components/Work--Landscape'
 import _get from 'lodash/get'
 export default {
   name: 'Home',
-  components: { WorkLandscape },
+  // components: { WorkLandscape },
   data () {
     return {
       works: null,

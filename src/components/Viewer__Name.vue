@@ -1,5 +1,5 @@
 <template lang="pug">
-  .absolute.pin.flex.items-center.justify-center.select-none.cursor-pointer(:class="['bg-' + data.theme, {'border-l border-grey-darkest': borderLeft}]", @click="$emit('click')")
+  .absolute.pin.flex.items-center.justify-center.select-none.cursor-pointer(:class="['bg-' + data.theme, {'sm-border-l border-grey-darkest': borderLeft}]", @click="$emit('click')")
     h1(:class="data.theme === 'black' ? 'text-white' : null") {{data.text}}
 </template>
 

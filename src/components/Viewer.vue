@@ -1,37 +1,35 @@
 <template lang="pug">
-  section.works.relative.flex.justify-between.bg-white.h-screen.overflow-hidden
-    //- divider
-    .hidden.sm-block.h-screen.absolute.w--50.pin-r.pin-t.pointer-events-none.border-l.border-grey-lighter
+  section.album-viewer.relative.flex.justify-between.bg-white.h-screen.overflow-hidden
     //- verso
     figure.h-screen.relative.hidden.sm-block(v-show="portrait !== 'recto'")
       transition(name="leaf")
-        component(:is="verso.type", :data="verso.data", :key="verso.index", @click="versoClick")
+        component(:is="verso.type", :data="verso.data", :key="verso.index", @click="onLeafClick('verso')")
       //- caption
       transition(name="leaf")
-        work-caption.absolute.w-full.z-10.pin-b.pin-l.h-50vh.sm-h-screen.sm-translx-100.bg-black(v-if="caption === 'verso'", :text="verso.data.primary.title", @close="closeCaption")
+        leaf-caption.absolute.w-full.z-10.pin-t.pin-l.h-50vh.sm-h-screen.sm-translx-100.bg-black(v-if="caption === 'verso'", :leaf="verso.data.primary", @close="closeCaption")
       //- caption toggle
-      nav.absolute.w-full.pin-l.pin-b.text-center.text-m
+      nav.absolute.w-full.pin-l.pin-b.text-center.text-xl
         button.p-6.inline-block(@click.stop="caption = 'verso'", v-show="hasCaption('verso')") &hellip;
       //- pg number
       .absolute.p-6.pin-l.pin-b.text-xs {{verso.index + 1}}
     //- recto
     figure.h-screen.relative(v-show="portrait !== 'verso'")
       transition(name="leaf")
-        component(:is="recto.type", :data="recto.data", :key="recto.index", :borderLeft="true", @click="rectoClick")
+        component(:is="recto.type", :data="recto.data", :key="recto.index", :borderLeft="true", @click="onLeafClick('recto')")
       //- caption
       transition(name="leaf")
-        work-caption.absolute.w-full.z-10.pin-b.pin-l.h-50vh.sm-h-screen.sm-translx_-100.bg-black(v-if="caption === 'recto'", :text="recto.data.primary.title", @close="closeCaption")
+        leaf-caption.absolute.w-full.z-10.pin-t.pin-l.h-50vh.sm-h-screen.sm-translx_-100.bg-black(v-if="caption === 'recto'", :leaf="recto.data.primary", @close="closeCaption")
       //- caption toggle
-      nav.absolute.w-full.pin-l.pin-b.text-center.text-m
+      nav.absolute.w-full.pin-l.pin-b.text-center.text-xl
         button.p-6.inline-block(@click.stop="caption = 'recto'", v-show="hasCaption('recto')") &hellip;
       //- pg number
       .absolute.p-6.pin-r.pin-b.text-xs {{recto.index + 1}}
 </template>
 
 <script>
-import name from './Work--Landscape__Name'
-import leaf from './Work--Landscape__Leaf'
-import workCaption from './Work--Landscape__Leaf__Caption'
+import name from './Viewer__Name'
+import leaf from './Viewer__Leaf'
+import leafCaption from './Viewer__Leaf__Caption'
 import { getRandomInt } from '@/utils'
 import _get from 'lodash/get'
 const newLeaf = (type, data, i) => { return { type: type, data: data, index: i } }
@@ -40,9 +38,9 @@ const full = newLeaf('name', { text: 'Patrick Groth', theme: 'black' }, -1)
 const first = newLeaf('name', { text: 'Patrick', theme: 'black' }, -1)
 const last = newLeaf('name', { text: 'Groth', theme: 'black' }, -2)
 export default {
-  name: 'Work--Landscape',
-  props: ['works'],
-  components: { name, leaf, workCaption },
+  name: 'Viewer',
+  props: ['leaves'],
+  components: { name, leaf, leafCaption },
   data () {
     return {
       verso: first,
@@ -61,18 +59,14 @@ export default {
     closeCaption () {
       this.caption = null
     },
-    versoClick () {
+    onLeafClick (side = 'verso') {
       if (this.caption) return this.closeCaption()
-      this.next('verso')
-    },
-    rectoClick () {
-      if (this.caption) return this.closeCaption()
-      this.next('recto')
+      this.next(side)
     },
     next (assignTo) {
       this.closeCaption()
-      const index = getRandomInt(0, this.works.length)
-      const work = this.works[index]
+      const index = getRandomInt(0, this.leaves.length)
+      const work = this.leaves[index]
       const inUse = index === this.verso.index || index === this.recto.index
       if (inUse) return this.next(assignTo)
       this[assignTo] = newLeaf('leaf', work, index)
@@ -105,7 +99,7 @@ export default {
 </style>
 
 <style>
-.works figure{
+.album-viewer figure{
   flex:1 0 50%;
   @nest .no-touchevents & nav{
     opacity:0;

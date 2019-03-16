@@ -596,6 +596,7 @@ module.exports = {
 
   margin: {
     'auto': 'auto',
+    '1em': '1em',
     // 'px': '1px',
     '0': '0',
     '1': '0.25rem',
@@ -789,7 +790,7 @@ module.exports = {
     borderColors: [],
     borderRadius: false,
     borderStyle: false,
-    borderWidths: [],
+    borderWidths: ['responsive'],
     cursor: [],
     display: ['responsive'],
     flexbox: ['responsive'],

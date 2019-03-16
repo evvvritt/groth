@@ -1,12 +1,15 @@
 <template lang="pug">
   article
+    viewer(v-if="album && album.body", :leaves="album.body")
 </template>
 
 <script>
+import Viewer from '@/components/Viewer'
 import _get from 'lodash/get'
 export default {
   name: 'Album',
   props: ['slug'],
+  components: { Viewer },
   data () {
     return {
       album: null
