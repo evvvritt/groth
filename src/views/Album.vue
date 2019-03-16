@@ -1,6 +1,6 @@
 <template lang="pug">
-  article
-    viewer(v-if="album && album.body", :leaves="album.body")
+  article(v-if="album")
+    viewer(:leaves="album.body", :title="[album.title_left, album.title_right]")
 </template>
 
 <script>

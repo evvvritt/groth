@@ -1,7 +1,7 @@
 <template lang="pug">
   section.album-viewer.relative.flex.justify-between.bg-white.h-screen.overflow-hidden
     //- verso
-    figure.h-screen.relative.hidden.sm-block(v-show="portrait !== 'recto'")
+    figure.h-screen.relative.hidden.sm-block(v-if="verso", v-show="portrait !== 'recto'")
       transition(name="leaf")
         component(:is="verso.type", :data="verso.data", :key="verso.index", @click="onLeafClick('verso')")
       //- caption
@@ -13,9 +13,9 @@
       //- pg number
       .absolute.p-6.pin-l.pin-b.text-xs {{verso.index + 1}}
     //- recto
-    figure.h-screen.relative(v-show="portrait !== 'verso'")
+    figure.h-screen.relative(v-if="recto", v-show="portrait !== 'verso'")
       transition(name="leaf")
-        component(:is="recto.type", :data="recto.data", :key="recto.index", :borderLeft="true", @click="onLeafClick('recto')")
+        component(:is="recto.type", :data="recto.data", :key="recto.index", :isRecto="true", @click="onLeafClick('recto')")
       //- caption
       transition(name="leaf")
         leaf-caption.absolute.w-full.z-10.pin-t.pin-l.h-50vh.sm-h-screen.sm-translx_-100.bg-black(v-if="caption === 'recto'", :leaf="recto.data.primary", @close="closeCaption")
@@ -27,25 +27,24 @@
 </template>
 
 <script>
-import name from './Viewer__Name'
+import titleleaf from './Viewer__TitleLeaf'
 import leaf from './Viewer__Leaf'
 import leafCaption from './Viewer__Leaf__Caption'
 import { getRandomInt } from '@/utils'
 import _get from 'lodash/get'
 const newLeaf = (type, data, i) => { return { type: type, data: data, index: i } }
-const loadedPortrait = window.innerWidth < window.innerHeight
-const full = newLeaf('name', { text: 'Patrick Groth', theme: 'black' }, -1)
-const first = newLeaf('name', { text: 'Patrick', theme: 'black' }, -1)
-const last = newLeaf('name', { text: 'Groth', theme: 'black' }, -2)
 export default {
   name: 'Viewer',
-  props: ['leaves'],
-  components: { name, leaf, leafCaption },
+  components: { titleleaf, leaf, leafCaption },
+  props: {
+    leaves: { type: Array, default: () => [] },
+    title: { type: Array, default: () => ['', ''] }
+  },
   data () {
     return {
-      verso: first,
-      recto: loadedPortrait ? full : last,
-      isPortrait: loadedPortrait,
+      verso: null,
+      recto: null,
+      isPortrait: window.innerWidth < window.innerHeight,
       portrait: null,
       afterResize: null,
       caption: null
@@ -81,7 +80,14 @@ export default {
         this.isPortrait = window.innerWidth < window.innerHeight
         this.portrait = !this.isPortrait ? null : this.portrait
       }, 200)
+    },
+    setIntro () {
+      this.verso = newLeaf('titleleaf', { title: this.title, theme: 'black' }, -1)
+      this.recto = newLeaf('titleleaf', { title: this.title, theme: 'black' }, -2)
     }
+  },
+  created () {
+    this.setIntro()
   },
   mounted () {
     window.addEventListener('resize', this.onResize)
