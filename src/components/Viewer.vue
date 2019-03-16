@@ -1,5 +1,7 @@
 <template lang="pug">
   section.album-viewer.relative.flex.justify-between.bg-white.h-screen.overflow-hidden
+    //- divider
+    .hidden.sm-block.h-screen.absolute.w--50.pin-r.pin-t.pointer-events-none.border-l.border-grey-lighter
     //- verso
     figure.h-screen.relative.hidden.sm-block(v-if="verso", v-show="portrait !== 'recto'")
       transition(name="leaf")
