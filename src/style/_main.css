@@ -1,3 +1,10 @@
+/** 
+ * CSS Variables
+ * Import here if using variables or @custom-media-query in tailwind,
+ * so postcss-preset-env will polyfill them.
+**/
+@import './_settings';
+
 /**
  * This injects Tailwind's base styles, which is a combination of
  * Normalize.css and some additional base styles.
@@ -54,5 +61,16 @@
  * @import "utilities/background-patterns";
  * @import "utilities/skew-transforms";
  */
+ /* hide with accessibility */
+ .reader-show{
+ position: absolute!important;
+ height: 1px;
+ width: 1px;
+ overflow: hidden;
+ clip: rect(1px,1px,1px,1px);
+ }
+
  .left-50{left:50%;}
  .translx_-50{transform:translateX(-50%);}
+
+ .trans-opacity-quick{transition:opacity var(--duration-quick)}

@@ -1,5 +1,6 @@
 <template lang="pug">
-  .leaf.absolute.pin.flex.items-center.justify-center.bg-cover.bg-center.cursor-pointer.px-8.md-px-5vmx(@click="$emit('click')", :style="bleedStyle", :role="isBleed ? 'img' : 'none'")
+  .leaf.absolute.pin.flex.items-center.justify-center.bg-cover.bg-center.cursor-pointer.px-8.md-px-5vmx.trans-opacity-quick(@click="$emit('click')", :style="bleedStyle", :role="isBleed ? 'img' : 'none'", :class="{'opacity-0': !loaded}")
+    img.reader-show(v-if="image", :src="image.url", :alt="image.alt", @load="loaded = true")
     //- non-bleed
     .bg-no-repeat.bg-center.pb-100pct.bg-contain.w-full(v-if="!isBleed", role="img", :style="imgStyle")
 </template>
@@ -9,9 +10,17 @@ import _get from 'lodash/get'
 export default {
   name: 'Work--Landscape__Leaf',
   props: ['data', 'pgNumb'],
+  data () {
+    return {
+      loaded: false
+    }
+  },
   computed: {
+    image () {
+      return _get(this.data, 'primary.image') || {}
+    },
     bgImg () {
-      return 'url(' + _get(this.data, 'primary.image.url') + ')'
+      return 'url(' + this.image.url + ')'
     },
     isBleed () {
       return _get(this.data, 'primary.bleed') === 'true'
