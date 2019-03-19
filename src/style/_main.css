@@ -74,3 +74,5 @@
  .translx_-50{transform:translateX(-50%);}
 
  .trans-opacity-quick{transition:opacity var(--duration-quick)}
+
+ .children-mt-1em > * + * {margin-top: 1em;}

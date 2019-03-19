@@ -46,7 +46,7 @@ let colors = {
   'inherit': 'inherit',
 
   'black': 'black', // '#22292f',
-  'grey-darkest': '#3d4852',
+  'grey-darkest': 'var(--grey-darkest)',
   'grey-darker': '#606f7b',
   'grey-dark': '#8795a1',
   'grey': '#b8c2cc',
@@ -491,9 +491,9 @@ module.exports = {
   minHeight: {
     // '0': '0',
     '48': '12rem',
-    '56': '14rem'
+    '56': '14rem',
     // 'full': '100%',
-    // 'screen': '100vh'
+    'screen': '100vh'
   },
 
   /*
@@ -513,16 +513,8 @@ module.exports = {
   */
 
   maxWidth: {
-    'xs': '20rem',
-    'sm': '30rem',
-    'md': '40rem',
-    'lg': '50rem',
-    'xl': '60rem',
-    '2xl': '70rem',
-    '3xl': '80rem',
-    '4xl': '90rem',
-    '5xl': '100rem',
-    'full': '100%'
+    'md': '32em',
+    'lg': '40em'
   },
 
   /*
@@ -805,7 +797,7 @@ module.exports = {
     lists: false,
     margin: [],
     maxHeight: false,
-    maxWidth: false,
+    maxWidth: [],
     minHeight: ['responsive'],
     minWidth: false,
     negativeMargin: false,
