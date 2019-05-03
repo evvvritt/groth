@@ -1,5 +1,5 @@
 <template lang="pug">
-  #app
+  #app.font-sans
     router-view(:key="$route.path")
 </template>
 
@@ -15,6 +15,6 @@ export default {
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size:16px;
+  font-size:18px;
 }
 </style>

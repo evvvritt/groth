@@ -1,19 +1,19 @@
 <template lang="pug">
-  article.text-white.px-6
-    .min-h-screen.flex.items-center.justify-center
-      section.max-w-lg.py-32
-        prismic-rich-text.text__textbody.children-mt-1em(v-if="doc", :field="doc.text")
+  article.text-white
+    .flex.items-center.justify-between
+      //- .w--50
+      section.min-h-screen.lg-w--50.py-12.px-12.lg-py-16.lg-pl-16.lg-pr-24.lg-border-r.border-grey-darkest
+        prismic-rich-text.text-xl.lg-text-xl.text__textbody.children-mt-1em(v-if="doc", :field="doc.text", style="max-width:26em")
     footer
-      router-link(:to="{name: 'home'}", title="Home")
-        footnote /
+      footnotes
 </template>
 
 <script>
-import Footnote from '@/components/Footnotes__Note'
+import Footnotes from '@/components/Footnotes'
 export default {
   name: 'TextDoc',
   props: ['slug'],
-  components: { Footnote },
+  components: { Footnotes },
   data () {
     return {
       doc: null
@@ -40,7 +40,7 @@ export default {
   & >>> a{
     font-style: bolder;
     padding-bottom: 1px;
-    border-bottom: 1px solid var(--grey-darkest);
+    border-bottom: 1px dotted var(--grey-darkest);
     &:not([href^="/"])::after{
       content: ' \2197\fe0e';
       font-size:0.75em;

@@ -120,9 +120,8 @@ module.exports = {
 
   fonts: {
     'sans': [
-      'system-ui',
-      'BlinkMacSystemFont',
       '-apple-system',
+      'BlinkMacSystemFont',
       'Segoe UI',
       'Roboto',
       'Oxygen',
@@ -132,27 +131,27 @@ module.exports = {
       'Droid Sans',
       'Helvetica Neue',
       'sans-serif'
-    ],
-    'serif': [
-      'Constantia',
-      'Lucida Bright',
-      'Lucidabright',
-      'Lucida Serif',
-      'Lucida',
-      'DejaVu Serif',
-      'Bitstream Vera Serif',
-      'Liberation Serif',
-      'Georgia',
-      'serif'
-    ],
-    'mono': [
-      'Menlo',
-      'Monaco',
-      'Consolas',
-      'Liberation Mono',
-      'Courier New',
-      'monospace'
     ]
+    // 'serif': [
+    //   'Constantia',
+    //   'Lucida Bright',
+    //   'Lucidabright',
+    //   'Lucida Serif',
+    //   'Lucida',
+    //   'DejaVu Serif',
+    //   'Bitstream Vera Serif',
+    //   'Liberation Serif',
+    //   'Georgia',
+    //   'serif'
+    // ],
+    // 'mono': [
+    //   'Menlo',
+    //   'Monaco',
+    //   'Consolas',
+    //   'Liberation Mono',
+    //   'Courier New',
+    //   'monospace'
+    // ]
   },
 
   /*
@@ -513,6 +512,7 @@ module.exports = {
   */
 
   maxWidth: {
+    'sm': '30em',
     'md': '32em',
     'lg': '40em'
   },
@@ -790,7 +790,7 @@ module.exports = {
     display: ['responsive'],
     flexbox: ['responsive'],
     float: false,
-    fonts: false,
+    fonts: [],
     fontWeights: false,
     height: ['responsive'],
     leading: false,
