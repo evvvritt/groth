@@ -1,31 +1,31 @@
 <template lang="pug">
   section.album-viewer.relative.flex.justify-between.bg-white.h-screen.overflow-hidden
     //- divider
-    .hidden.sm-block.h-screen.absolute.w--50.pin-r.pin-t.pointer-events-none.border-l.border-grey-lighter
+    .hidden.sm-block.h-screen.absolute.w--50.right-0.top-0.pointer-events-none.border-l.border-grey-lighter
     //- verso
     figure.h-screen.relative.hidden.sm-block(v-if="verso", v-show="portrait !== 'recto'")
       transition(name="leaf")
         component(:is="verso.type", :data="verso.data", :key="verso.index", @click="onLeafClick('verso')")
       //- caption
       transition(name="leaf")
-        leaf-caption.absolute.w-full.z-10.pin-t.pin-l.h-50vh.sm-h-screen.sm-translx-100.bg-black(v-if="caption === 'verso'", :leaf="verso.data.primary", @close="closeCaption")
+        leaf-caption.absolute.w-full.z-10.top-0.left-0.h-50vh.sm-h-screen.sm-translx-100.bg-black(v-if="caption === 'verso'", :leaf="verso.data.primary", @close="closeCaption")
       //- caption toggle
-      nav.absolute.w-full.pin-l.pin-b.text-center.text-xl
+      nav.absolute.w-full.left-0.bottom-0.text-center.text-xl
         button.p-6.inline-block(@click.stop="caption = 'verso'", v-show="hasCaption('verso')") &hellip;
       //- pg number
-      .absolute.p-6.pin-l.pin-b.text-xs {{verso.index + 1}}
+      .absolute.p-6.left-0.bottom-0.text-xs {{verso.index + 1}}
     //- recto
     figure.h-screen.relative(v-if="recto", v-show="portrait !== 'verso'")
       transition(name="leaf")
         component(:is="recto.type", :data="recto.data", :key="recto.index", :isRecto="true", @click="onLeafClick('recto')")
       //- caption
       transition(name="leaf")
-        leaf-caption.absolute.w-full.z-10.pin-t.pin-l.h-50vh.sm-h-screen.sm-translx_-100.bg-black(v-if="caption === 'recto'", :leaf="recto.data.primary", @close="closeCaption")
+        leaf-caption.absolute.w-full.z-10.top-0.left-0.h-50vh.sm-h-screen.sm-translx_-100.bg-black(v-if="caption === 'recto'", :leaf="recto.data.primary", @close="closeCaption")
       //- caption toggle
-      nav.absolute.w-full.pin-l.pin-b.text-center.text-xl
+      nav.absolute.w-full.left-0.bottom-0.text-center.text-xl
         button.p-6.inline-block(@click.stop="caption = 'recto'", v-show="hasCaption('recto')") &hellip;
       //- pg number
-      .absolute.p-6.pin-r.pin-b.text-xs {{recto.index + 1}}
+      .absolute.p-6.right-0.bottom-0.text-xs {{recto.index + 1}}
 </template>
 
 <script>

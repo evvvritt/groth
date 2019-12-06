@@ -12,7 +12,7 @@
  * You can see the styles here:
  * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
  */
-@import "tailwindcss/preflight";
+@import "tailwindcss/base";
 @import './base';
 /*@import './fonts';*/
 
@@ -62,6 +62,7 @@
  * @import "utilities/skew-transforms";
  */
  /* hide with accessibility */
+ 
  .reader-show{
  position: absolute!important;
  height: 1px;

@@ -4,7 +4,7 @@
       prismic-rich-text.mb-1em(:field="leaf.title")
       prismic-rich-text(:field="leaf.description")
     //- close btn
-    .absolute.pin-b.p-6.left-50.translx_-50.text-grey-light.cursor-pointer(@click="$emit('close')")
+    .absolute.bottom-0.p-6.left-50.translx_-50.text-grey-light.cursor-pointer(@click="$emit('close')")
       close-icon(width="12px", height="12px")
 </template>
 

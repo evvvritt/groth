@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "postbuild": "yarn purgecss",
+    "purgecss": "node_modules/purgecss/bin/purgecss --config ./purgecss.config.js --out ./dist/css"
   },
   "dependencies": {
     "lodash": "^4.17.11",
@@ -24,7 +26,7 @@
     "lint-staged": "^7.2.2",
     "postcss-import": "^12.0.1",
     "postcss-preset-env": "^6.5.0",
-    "tailwindcss": "^0.7.3",
+    "tailwindcss": "^1.0",
     "vue-cli-plugin-pug": "^1.0.7",
     "vue-template-compiler": "^2.5.17"
   },
@@ -45,10 +47,10 @@
   "postcss": {
     "plugins": {
       "postcss-import": {},
+      "tailwindcss": {},
       "postcss-preset-env": {
         "stage": 0
       },
-      "tailwindcss": "./tailwind.js",
       "autoprefixer": {}
     }
   },
