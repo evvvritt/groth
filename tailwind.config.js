@@ -176,7 +176,8 @@ module.exports = {
       ...theme('spacing'),
       full: '100%',
       screen: '100vh',
-      '50vh': '50vh'
+      '50vh': '50vh',
+      '75vh': '75vh'
     }),
     inset: {
       '0': '0',
