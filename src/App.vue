@@ -7,7 +7,10 @@
 // import '@/custom.modernizr'
 import '@/style/_main.css'
 export default {
-  name: 'app'
+  name: 'app',
+  created () {
+    this.$store.dispatch('getSite')
+  }
 }
 </script>
 
