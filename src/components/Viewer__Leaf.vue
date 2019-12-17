@@ -46,7 +46,7 @@ export default {
     respImgClass () {
       return {
         'absolute h-full w-full inset-0 object-center object-cover': this.isBleed,
-        'h-75vh w-10x12 object-contain object-center': !this.isBleed
+        'h-75vh w-full lg-w-10x12 object-contain object-center': !this.isBleed
       }
     }
   },
