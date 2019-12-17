@@ -2,7 +2,7 @@
   article.text-white.lg-border-t.border-grey-darkest
     .flex.items-center.justify-between
       //- .w--50
-      section.min-h-screen.lg-w-1x2.py-12.px-12.lg-py-16.lg-pl-16.lg-pr-24.lg-border-r.border-grey-darkest
+      section.min-h-screen_-64.lg-w-1x2.py-12.px-12.lg-py-16.lg-pl-16.lg-pr-24.lg-border-r.border-grey-darkest
         prismic-rich-text.text-xl.lg-text-xl.text__textbody.children-mt-1em(v-if="doc", :field="doc.text", style="max-width:26em")
     footer
       footnotes
@@ -34,6 +34,13 @@ export default {
 <style scoped>
 @import '../style/_settings';
 .text__textbody{
+  & >>> h6 {
+    margin-top: 3.5em;
+    font-size:0.66em;
+    & + p {
+      margin-top: 0.5em;
+    }
+  }
   & >>> * {
     min-height: 1em;
   }

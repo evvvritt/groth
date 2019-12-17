@@ -231,7 +231,8 @@ module.exports = {
       ...theme('spacing'),
       '0': '0',
       full: '100%',
-      screen: '100vh'
+      screen: '100vh',
+      'screen_-64': 'calc(100vh - 16rem)'
     }),
     minWidth: {
       '0': '0',

@@ -5,7 +5,7 @@
         prismic-rich-text.cursor-pointer.truncate(:field="note.primary.label")
     router-link(to="/", title="Home", v-if="$route.name !== 'home'")
       footnote
-        img.block(src="~@/assets/icon-house--filled.svg", style="height:1.375em;")
+        img.block(src="~@/assets/icon-house--filled.svg", style="height:2.8rem")
 </template>
 
 <script>
