@@ -1,5 +1,5 @@
 <template lang="pug">
-  header.text-white.text-sm
+  header.text-white.text-sm.border-b.border-grey-darkest
     //- site title
     row
       h1

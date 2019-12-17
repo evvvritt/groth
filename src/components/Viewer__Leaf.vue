@@ -3,7 +3,7 @@
     img.reader-show(v-if="image", :src="image.url", :alt="image.alt", @load="loaded = true")
     //- non-bleed
     .bg-no-repeat.bg-center.pb-full.bg-contain.w-full(v-if="!isBleed", role="img", :style="imgStyle")
-  .leaf.absolute.inset-0.h-full.w-full.flex.items-center.justify-center(@click="$emit('click')")
+  .leaf.absolute.inset-0.h-full.w-full.flex.items-center.justify-center.px-8.lg-px-0.select-none(@click="$emit('click')")
     //- img.reader-show(v-if="image", :src="image.url", :alt="image.alt", @load="loaded = true")
     //- template(v-if="isBleed")
       img.
@@ -46,7 +46,7 @@ export default {
     respImgClass () {
       return {
         'absolute h-full w-full inset-0 object-center object-cover': this.isBleed,
-        'h-75vh w-3x4 object-contain object-center': !this.isBleed
+        'h-75vh w-10x12 object-contain object-center': !this.isBleed
       }
     }
   },

@@ -8,8 +8,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    winW: window.innerWidth,
-    winH: window.innerHeight,
+    // winW: window.innerWidth,
+    // winH: window.innerHeight,
     site: null,
     albums: []
   },

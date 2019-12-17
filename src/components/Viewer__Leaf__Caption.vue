@@ -1,11 +1,12 @@
 <template lang="pug">
   figcaption.flex.items-center.justify-center.p-16(@click.stop="$emit('click')", style="outline:1px solid")
-    .text-white.text-sm.mx-auto.text-center(style="max-width:32em")
+    .relative.text-white.text-sm.mx-auto.text-center(style="max-width:32em")
       prismic-rich-text.mb-1em(:field="leaf.title")
       prismic-rich-text(:field="leaf.description")
-    //- close btn
-    .absolute.bottom-0.p-6.left-50.translx_-50.text-grey-light.cursor-pointer(@click="$emit('close')")
-      svgx(width="12px", height="12px")
+      //- close btn
+      .absolute.w-full.top-100.left-0.pt-4
+        button.inline-block.p-6.text-white.cursor-pointer(@click="$emit('close')")
+          svgx(width="16px", height="16px")
 </template>
 
 <script>

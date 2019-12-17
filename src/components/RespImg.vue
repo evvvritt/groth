@@ -1,5 +1,5 @@
 <template lang="pug">
-  img.block(:src="src", :alt="alt", @load="loaded = true", @error="thumb = src", style="transition: opacity 300ms")
+  img.block.pointer-events-none(:src="src", :alt="alt", @load="loaded = true", @error="thumb = src", style="transition: opacity 300ms", @contextmenu.prevent)
 </template>
 
 <script>

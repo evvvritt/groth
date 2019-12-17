@@ -395,6 +395,7 @@ module.exports = {
   plugins: [
     function ({ addUtilities }) {
       const newUtils = {
+        '.top-100': { top: '100%' },
         '.translx-100': { transform: 'translateX(100%)' },
         '.translx_-100': { transform: 'translateX(-100%)' }
       }
