@@ -109,6 +109,7 @@ export default {
 <style>
 .album-viewer figure{
   flex:1 0 50%;
+  /* TODO revise to @media */
   @nest .no-touchevents & nav{
     opacity:0;
     transition:opacity 500ms;

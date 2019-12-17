@@ -14,7 +14,7 @@
  */
 @import "tailwindcss/base";
 @import './base';
-/*@import './fonts';*/
+@import './fonts';
 
 /**
  * This injects any component classes registered by plugins.

@@ -120,6 +120,7 @@ module.exports = {
     },
     fontFamily: {
       sans: [
+        'Violet Sans',
         '-apple-system',
         'BlinkMacSystemFont',
         'Segoe UI',

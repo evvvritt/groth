@@ -1,5 +1,5 @@
 <template lang="pug">
-  article.text-white
+  article.text-white.lg-border-t.border-grey-darkest
     .flex.items-center.justify-between
       //- .w--50
       section.min-h-screen.lg-w-1x2.py-12.px-12.lg-py-16.lg-pl-16.lg-pr-24.lg-border-r.border-grey-darkest
@@ -38,7 +38,7 @@ export default {
     min-height: 1em;
   }
   & >>> a{
-    font-style: bolder;
+    /*font-style: bolder;*/
     padding-bottom: 1px;
     border-bottom: 1px dotted var(--grey-darkest);
     &:not([href^="/"])::after{
