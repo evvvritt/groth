@@ -18,7 +18,7 @@ export default {
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size:22px;
+  font-size:20px;
   line-height: 1.22;
 }
 </style>
