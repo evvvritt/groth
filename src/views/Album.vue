@@ -1,40 +1,26 @@
 <template lang="pug">
   article(v-if="album")
-    viewer(:leaves="album.body", :title="[album.title_left, album.title_right]")
+    viewer-lnd(:leaves="album.body", :title="[album.title_left, album.title_right]")
     footer
       footnotes(:notes="album.footnotes")
 </template>
 
 <script>
-import Viewer from '@/components/Viewer'
+import ViewerLnd from '@/components/Viewer--Lnd'
 import Footnotes from '@/components/Footnotes'
-import _get from 'lodash/get'
 export default {
   name: 'Album',
   props: ['slug'],
-  components: { Viewer, Footnotes },
+  components: { ViewerLnd, Footnotes },
   data () {
     return {
       album: null
     }
   },
-  methods: {
-    async getAlbum (uid) {
-      try {
-        uid = uid || await this.getHomepageAlbumUID()
-        const doc = await this.$prismic.client.getByUID('album', uid)
-        this.album = doc && doc.data
-      } catch (err) {
-        console.error(err)
-      }
-    },
-    getHomepageAlbumUID () {
-      return this.$prismic.client.getSingle('site')
-        .then(doc => _get(doc, 'data.homepage_album.uid'))
-    }
-  },
   created () {
-    this.getAlbum(this.slug)
+    this.$store.dispatch('getAlbum', this.slug).then(doc => {
+      this.album = doc && doc.data
+    })
   }
 }
 </script>

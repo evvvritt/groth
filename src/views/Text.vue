@@ -34,6 +34,13 @@ export default {
 <style scoped>
 @import '../style/_settings';
 .text__textbody{
+  & >>> h6 {
+    margin-top: 3.5em;
+    font-size:0.66em;
+    & + p {
+      margin-top: 0.5em;
+    }
+  }
   & >>> * {
     min-height: 1em;
   }
