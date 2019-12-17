@@ -4,8 +4,8 @@ import router from './router'
 import store from './store'
 import PrismicVue from 'prismic-vue'
 import linkResolver from './prismic-link-resolver'
+import './plugins/include-base-components'
 
-console.log(window.prismic.endpoint)
 Vue.use(PrismicVue, {
   endpoint: window.prismic.endpoint,
   linkResolver

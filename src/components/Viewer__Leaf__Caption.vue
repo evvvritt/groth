@@ -5,15 +5,13 @@
       prismic-rich-text(:field="leaf.description")
     //- close btn
     .absolute.bottom-0.p-6.left-50.translx_-50.text-grey-light.cursor-pointer(@click="$emit('close')")
-      close-icon(width="12px", height="12px")
+      svgx(width="12px", height="12px")
 </template>
 
 <script>
-import closeIcon from '@/components/SVG-X'
 export default {
   name: 'Work--Landscape__Leaf__Caption',
-  props: ['leaf'],
-  components: { closeIcon }
+  props: ['leaf']
 }
 </script>
 

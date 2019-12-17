@@ -63,17 +63,21 @@
  */
  /* hide with accessibility */
  
- .reader-show{
- position: absolute!important;
- height: 1px;
- width: 1px;
- overflow: hidden;
- clip: rect(1px,1px,1px,1px);
- }
+.reader-show{
+position: absolute!important;
+height: 1px;
+width: 1px;
+overflow: hidden;
+clip: rect(1px,1px,1px,1px);
+}
 
- .left-50{left:50%;}
- .translx_-50{transform:translateX(-50%);}
+.overlay{
+  @apply inset-0 h-full w-full;
+}
 
- .trans-opacity-quick{transition:opacity var(--duration-quick)}
+.left-50{left:50%;}
+.translx_-50{transform:translateX(-50%);}
 
- .children-mt-1em > * + * {margin-top: 1em;}
+.trans-opacity-quick{transition:opacity var(--duration-quick)}
+
+.children-mt-1em > * + * {margin-top: 1em;}

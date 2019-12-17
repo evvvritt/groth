@@ -6,22 +6,8 @@ module.exports = {
     screens: {
       sm: '541px',
       md: '768px',
-      lg: '992px',
+      lg: '960px',
       xl: '1200px'
-    },
-    colors: {
-      'transparent': 'transparent',
-      'inherit': 'inherit',
-
-      'black': 'black', // '#22292f',
-      'grey-darkest': 'var(--grey-darkest)',
-      'grey-darker': '#606f7b',
-      'grey-dark': '#8795a1',
-      'grey': '#b8c2cc',
-      'grey-light': '#dae1e7',
-      'grey-lighter': '#f1f5f8',
-      'grey-lightest': '#f8fafc',
-      'white': '#ffffff'
     },
     spacing: {
       px: '1px',
@@ -45,6 +31,20 @@ module.exports = {
       '56': '14rem',
       '64': '16rem',
       '5vmx': '5vmax'
+    },
+    colors: {
+      'transparent': 'transparent',
+      'inherit': 'inherit',
+
+      'black': 'black', // '#22292f',
+      'grey-darkest': 'var(--grey-darkest)',
+      'grey-darker': '#606f7b',
+      'grey-dark': '#8795a1',
+      'grey': '#b8c2cc',
+      'grey-light': '#dae1e7',
+      'grey-lighter': '#f1f5f8',
+      'grey-lightest': '#f8fafc',
+      'white': '#ffffff'
     },
     backgroundColor: theme => theme('colors'),
     backgroundPosition: {

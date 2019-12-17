@@ -1,8 +1,12 @@
 <template lang="pug">
   article(v-if="album")
+    app-header.lg-hidden
+      row(slot="title", v-if="slug")
+        h2 {{ album.title_left + ' ' + album.title_right }}
+      footnotes(slot="menu", :notes="album.footnotes", :homelink="false")
     viewer-lnd(:leaves="album.body", :title="[album.title_left, album.title_right]")
-    footer
-      footnotes(:notes="album.footnotes")
+    footer.hidden.lg-block
+      footnotes(:notes="album.footnotes", :homelink="$route.name !== 'home'")
 </template>
 
 <script>
