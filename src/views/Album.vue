@@ -4,18 +4,20 @@
       row(slot="title", v-if="slug")
         h2 {{ album.title_left + ' ' + album.title_right }}
       footnotes(slot="menu", :notes="album.footnotes", :homelink="false")
-    viewer-lnd(:slices="album.body", :title="[album.title_left, album.title_right]")
+    //- viewer-lnd(:slices="album.body", :title="[album.title_left, album.title_right]")
+    viewer-prt
     footer.hidden.lg-block
       footnotes(:notes="album.footnotes", :homelink="$route.name !== 'home'")
 </template>
 
 <script>
-import ViewerLnd from '@/components/Viewer--Lnd'
+// import ViewerLnd from '@/components/Viewer--Lnd'
+import ViewerPrt from '@/components/Viewer--Portrait'
 import Footnotes from '@/components/Footnotes'
 export default {
   name: 'Album',
   props: ['slug'],
-  components: { ViewerLnd, Footnotes },
+  components: { ViewerPrt, Footnotes },
   data () {
     return {
       album: null
