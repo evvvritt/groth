@@ -28,9 +28,11 @@ export default {
   },
   computed: {
     clipPath () {
+      const val = `inset(0% ${this.clipR + '%'} 0% ${this.clipL + '%'})`
       return {
-        transition: this.cssTrans ? 'clip-path 100ms' : '',
-        clipPath: `inset(0% ${this.clipR + '%'} 0% ${this.clipL + '%'})`
+        transition: this.cssTrans ? 'all 200ms' : '',
+        clipPath: val,
+        '-webkit-clip-path': val
       }
     },
     nextPos () {
