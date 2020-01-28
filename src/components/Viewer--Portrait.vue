@@ -1,14 +1,10 @@
 <template lang="pug">
   section.album-viewer--portrait.relative.h-screen(@touchstart="onTouchStart", @touchmove="onTouchMove", @touchend="onTouchEnd")
     //- main slide
-    figure.absolute.overlay.z-20.bg-white(:style="[clipPath]")
-      leaf(:data="slices[active]", v-if="slices[active]")
-    //- prev
-    .absolute.overlay.z-10.bg-white(v-show="direction !== 'next'")
-      leaf(:data="slices[prevPos]", v-if="slices[prevPos]")
-    //- next
-    .absolute.overlay.z-10.bg-white(v-show="direction !== 'prev'")
-      leaf(:data="slices[nextPos]", v-if="slices[nextPos]")
+    figure.absolute.overlay.bg-white(v-for="(slice, i) in slices", :style="active === i && [clipPath]", :class="{'z-20': active === i, 'z-10': (direction === 'next' && i === nextPos) || (direction === 'prev' && i === prevPos)}")
+      leaf(:data="slice")
+    //- line
+    .absolute.z-30.top-0.h-full(v-show="direction", style="width:1px; background: #555", :style="lineStyle")
 </template>
 
 <script>
@@ -21,7 +17,6 @@ export default {
   data () {
     return {
       active: 0,
-      slides: ['red', 'green', 'blue'],
       winW: window.innerWidth,
       clipL: 0,
       clipR: 0,
@@ -42,21 +37,29 @@ export default {
       }
     },
     nextPos () {
-      return this.active + 1 === this.slides.length ? 0 : this.active + 1
+      return this.active + 1 === this.slices.length ? 0 : this.active + 1
     },
     prevPos () {
-      return this.active - 1 < 0 ? this.slides.length - 1 : this.active - 1
+      return this.active - 1 < 0 ? this.slices.length - 1 : this.active - 1
+    },
+    lineStyle () {
+      const dir = this.direction
+      return {
+        left: dir === 'prev' ? this.clipL + '%' : 'auto',
+        right: dir === 'next' ? this.clipR + '%' : 'auto',
+        transition: this.cssTrans ? 'all 200ms' : 'none'
+      }
     }
   },
   methods: {
     bg (i) {
       return {
-        backgroundColor: this.slides[i]
+        backgroundColor: this.slices[i]
       }
     },
     next (dir) {
       const actv = this.active
-      const total = this.slides.length
+      const total = this.slices.length
       this.active = actv + dir === total ? 0 : actv + dir < 0 ? total - 1 : actv + dir
     },
     onScroll () {
