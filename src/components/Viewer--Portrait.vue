@@ -1,11 +1,11 @@
 <template lang="pug">
   section.album-viewer--portrait.relative.h-screen(@touchstart="onTouchStart", @touchmove="onTouchMove", @touchend="onTouchEnd")
     //- main slide
-    figure.absolute.overlay.z-20(style="background:red;", :style="[clipPath]")
+    figure.absolute.overlay.z-20(:style="[bg(active), clipPath]")
     //- prev
-    figure.absolute.overlay.z-10(style="background:blue;", v-show="direction === 'prev'")
+    figure.absolute.overlay.z-10(:style="[bg(prev)]", v-show="direction === 'prev'")
     //- next
-    figure.absolute.overlay.z-10(style="background:green;", v-show="direction === 'next'")
+    figure.absolute.overlay.z-10(:style="[bg(next)]", v-show="direction === 'next'")
 </template>
 
 <script>
@@ -14,6 +14,8 @@ export default {
   props: ['slices'],
   data () {
     return {
+      active: 0,
+      slides: ['red', 'green', 'blue'],
       winW: window.innerWidth,
       clipL: 0,
       clipR: 0,
@@ -30,9 +32,20 @@ export default {
         transition: this.cssTrans ? 'clip-path 100ms' : '',
         clipPath: `inset(0% ${this.clipR + '%'} 0% ${this.clipL + '%'})`
       }
+    },
+    next () {
+      return this.active + 1 > this.slides.length ? 0 : this.active + 1
+    },
+    prev () {
+      return this.active - 1 < 0 ? this.slides.length - 1 : 0
     }
   },
   methods: {
+    bg (i) {
+      return {
+        backgroundColor: this.slides[i]
+      }
+    },
     onScroll () {
       clearTimeout(this.afterScroll)
       this.canSlide = false
