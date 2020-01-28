@@ -3,9 +3,9 @@
     //- main slide
     figure.absolute.overlay.z-20(:style="[bg(active), clipPath]")
     //- prev
-    figure.absolute.overlay.z-10(:style="[bg(prev)]", v-show="direction === 'prev'")
+    figure.absolute.overlay.z-10(:style="[bg(prevPos)]", v-show="direction === 'prev'")
     //- next
-    figure.absolute.overlay.z-10(:style="[bg(next)]", v-show="direction === 'next'")
+    figure.absolute.overlay.z-10(:style="[bg(nextPos)]", v-show="direction === 'next'")
 </template>
 
 <script>
@@ -33,11 +33,11 @@ export default {
         clipPath: `inset(0% ${this.clipR + '%'} 0% ${this.clipL + '%'})`
       }
     },
-    next () {
-      return this.active + 1 > this.slides.length ? 0 : this.active + 1
+    nextPos () {
+      return this.active + 1 === this.slides.length ? 0 : this.active + 1
     },
-    prev () {
-      return this.active - 1 < 0 ? this.slides.length - 1 : 0
+    prevPos () {
+      return this.active - 1 < 0 ? this.slides.length - 1 : this.active - 1
     }
   },
   methods: {
@@ -45,6 +45,11 @@ export default {
       return {
         backgroundColor: this.slides[i]
       }
+    },
+    next (dir) {
+      const actv = this.active
+      const total = this.slides.length
+      this.active = actv + dir === total ? 0 : actv + dir < 0 ? total - 1 : actv + dir
     },
     onScroll () {
       clearTimeout(this.afterScroll)
@@ -80,11 +85,35 @@ export default {
     onTouchEnd () {
       cancelAnimationFrame(this.anim)
       this.cssTrans = true
+      let dir = null
       this.$nextTick(() => {
-        this.clipL = this.clipR = 0
+        switch (this.direction) {
+          case 'prev':
+            if (this.clipL > 55) {
+              this.clipL = 100
+              dir = -1
+            } else {
+              this.clipL = 0
+            }
+            break
+          case 'next':
+            if (this.clipR > 55) {
+              this.clipR = 100
+              dir = 1
+            } else {
+              this.clipR = 0
+            }
+        }
+        // this.clipL = this.clipR = 0
         setTimeout(() => {
           this.cssTrans = false
           this.direction = null
+          if (this.dir !== null) {
+            this.next(dir)
+            this.$nextTick(() => {
+              this.clipL = this.clipR = 0
+            })
+          }
         }, 200)
       })
     }
