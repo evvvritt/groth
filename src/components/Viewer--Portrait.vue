@@ -1,17 +1,23 @@
 <template lang="pug">
   section.album-viewer--portrait.relative.h-screen(@touchstart="onTouchStart", @touchmove="onTouchMove", @touchend="onTouchEnd")
     //- main slide
-    figure.absolute.overlay.z-20(:style="[bg(active), clipPath]")
+    figure.absolute.overlay.z-20.bg-white(:style="[clipPath]")
+      leaf(:data="slices[active]", v-if="slices[active]")
     //- prev
-    figure.absolute.overlay.z-10(:style="[bg(prevPos)]", v-show="direction === 'prev'")
+    .absolute.overlay.z-10.bg-white(v-show="direction !== 'next'")
+      leaf(:data="slices[prevPos]", v-if="slices[prevPos]")
     //- next
-    figure.absolute.overlay.z-10(:style="[bg(nextPos)]", v-show="direction === 'next'")
+    .absolute.overlay.z-10.bg-white(v-show="direction !== 'prev'")
+      leaf(:data="slices[nextPos]", v-if="slices[nextPos]")
 </template>
 
 <script>
+import leaf from './Viewer__Leaf'
 export default {
   name: 'Viewer--Portrait',
-  props: ['slices'],
+  props: {
+    slices: { type: Array, default: () => [] }
+  },
   data () {
     return {
       active: 0,
@@ -125,7 +131,8 @@ export default {
   },
   destroyed () {
     // window.removeEventListener('scroll', this.onScroll)
-  }
+  },
+  components: { leaf }
 }
 </script>
 

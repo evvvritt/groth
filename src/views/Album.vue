@@ -5,7 +5,7 @@
         h2 {{ album.title_left + ' ' + album.title_right }}
       footnotes(slot="menu", :notes="album.footnotes", :homelink="false")
     //- viewer-lnd(:slices="album.body", :title="[album.title_left, album.title_right]")
-    viewer-prt
+    viewer-prt(:slices="album.body")
     footer.hidden.lg-block
       footnotes(:notes="album.footnotes", :homelink="$route.name !== 'home'")
 </template>
