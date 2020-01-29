@@ -150,6 +150,7 @@ module.exports = {
       ]
     },
     fontSize: {
+      xxs: '0.66em',
       xs: '0.75em',
       sm: '0.875em',
       base: '1em',

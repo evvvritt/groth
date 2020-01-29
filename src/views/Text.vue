@@ -2,8 +2,11 @@
   article.text-white.lg-border-t.border-grey-darkest
     .flex.items-center.justify-between
       //- .w--50
-      section.min-h-screen.lg-w-1x2.py-12.px-12.lg-py-16.lg-pl-16.lg-pr-24.lg-border-r.border-grey-darkest
-        prismic-rich-text.md-text-lg.text__textbody.children-mt-1em(v-if="doc", :field="doc.text", style="max-width:26em")
+      section.min-h-screen.lg-w-1x2.py-12.px-12.lg-py-16.lg-pl-16.lg-pr-24.lg-border-r.border-grey-darkest.flex.flex-col.justify-between
+        template(v-if="doc")
+          prismic-rich-text.md-text-lg.text__textbody.children-mt-1em.underline-links(:field="doc.text", style="max-width:26em")
+          //- details
+          prismic-rich-text.text-xxs.children-mt-1em.mt-64.underline-links(v-if="doc.details", :field="doc.details")
     footer
       footnotes(:notes="doc.footnotes", :homelink="true", v-if="doc")
 </template>
@@ -47,7 +50,7 @@ export default {
   & >>> a{
     /*font-style: bolder;*/
     padding-bottom: 1px;
-    border-bottom: 1px dotted var(--grey-darkest);
+    /*border-bottom: 1px dotted var(--grey-darkest);*/
     &:not([href^="/"])::after{
       content: ' \2197\fe0e';
       font-size:0.75em;

@@ -81,3 +81,4 @@ clip: rect(1px,1px,1px,1px);
 .trans-opacity-quick{transition:opacity var(--duration-quick)}
 
 .children-mt-1em > * + * {margin-top: 1em;}
+.underline-links a {border-bottom: 1px dotted var(--grey-darkest);}
