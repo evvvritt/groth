@@ -1,10 +1,11 @@
 <template lang="pug">
-  section.album-viewer--portrait.relative.h-screen(@touchstart="onTouchStart", @touchmove="onTouchMove", @touchend="onTouchEnd")
-    //- main slide
-    figure.absolute.overlay.bg-white(v-for="(slice, i) in slices", :style="active === i && [clipPath]", :class="{'z-20': active === i, 'z-10': (direction === 'next' && i === nextPos) || (direction === 'prev' && i === prevPos)}")
-      leaf(:data="slice")
-    //- line
-    .absolute.z-30.top-0.h-full(v-show="direction", style="width:1px; background: #555", :style="lineStyle")
+  section.album-viewer--portrait.h-screen
+    .h-screen(@touchstart="onTouchStart", @touchmove="onTouchMove", @touchend="onTouchEnd", :class="{'fixed overlay z-40': fixed, 'relative': !fixed}")
+      //- main slide
+      figure.absolute.overlay.bg-white(v-for="(slice, i) in slices", :style="active === i && [clipPath]", :class="{'z-20': active === i, 'z-10': (direction === 'next' && i === nextPos) || (direction === 'prev' && i === prevPos)}")
+        leaf(:data="slice")
+      //- line
+      .absolute.z-30.top-0.h-full(v-show="direction", style="width:1px; background: #555", :style="lineStyle")
 </template>
 
 <script>
@@ -16,6 +17,7 @@ export default {
   },
   data () {
     return {
+      fixed: false,
       active: 0,
       winW: window.innerWidth,
       clipL: 0,
@@ -69,7 +71,7 @@ export default {
       const touch1 = e && e.touches[0]
       const dX = Math.abs(this.touch0.clientX - touch1.clientX)
       const dY = this.touch0.clientY - touch1.clientY
-      console.log(dY)
+      // console.log(dY)
       if (dY < -20 || dX < 20) return
       const val = Math.max(touch1.clientX, 0) / this.winW * 100
       if (!this.direction) {
@@ -126,12 +128,15 @@ export default {
       this.afterScroll = setTimeout(() => {
         const top = this.$el.getBoundingClientRect().top
         if (top === 0) {
-          const y = window.pageYOffset
-          if (y) {
-            console.log('lock', y)
-            this.$store.commit('LOCK_SCROLL', y)
-          }
+          this.fixed = true
         }
+        // if (top === 0) {
+        //   const y = window.pageYOffset
+        //   if (y) {
+        //     console.log('lock', y)
+        //     this.$store.commit('LOCK_SCROLL', y)
+        //   }
+        // }
       }, 100)
     }
   },
