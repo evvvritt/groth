@@ -62,14 +62,6 @@ export default {
       const total = this.slices.length
       this.active = actv + dir === total ? 0 : actv + dir < 0 ? total - 1 : actv + dir
     },
-    onScroll () {
-      clearTimeout(this.afterScroll)
-      this.canSlide = false
-      console.log(this.canSlide)
-      this.afterScroll = setTimeout(() => {
-        this.canSlide = true
-      }, 100)
-    },
     onTouchStart (e) {
       this.touch0 = e.touches[0]
     },
@@ -77,6 +69,7 @@ export default {
       const touch1 = e && e.touches[0]
       const dX = Math.abs(this.touch0.clientX - touch1.clientX)
       const dY = this.touch0.clientY - touch1.clientY
+      console.log(dY)
       if (dY < -20 || dX < 20) return
       const val = Math.max(touch1.clientX, 0) / this.winW * 100
       if (!this.direction) {
@@ -127,13 +120,26 @@ export default {
           }
         }, 200)
       })
+    },
+    onScroll () {
+      clearTimeout(this.afterScroll)
+      this.afterScroll = setTimeout(() => {
+        const top = this.$el.getBoundingClientRect().top
+        if (top === 0) {
+          const y = window.pageYOffset
+          if (y) {
+            console.log('lock', y)
+            this.$store.commit('LOCK_SCROLL', y)
+          }
+        }
+      }, 100)
     }
   },
   mounted () {
-    // window.addEventListener('scroll', this.onScroll)
+    window.addEventListener('scroll', this.onScroll)
   },
   destroyed () {
-    // window.removeEventListener('scroll', this.onScroll)
+    window.removeEventListener('scroll', this.onScroll)
   },
   components: { leaf }
 }

@@ -11,7 +11,8 @@ export default new Vuex.Store({
     // winW: window.innerWidth,
     // winH: window.innerHeight,
     site: null,
-    albums: []
+    albums: [],
+    scrollLock: 0
   },
   getters: {
     homeAlbumUID (state) {
@@ -24,6 +25,12 @@ export default new Vuex.Store({
     },
     ADD_ALBUM (state, doc) {
       state.albums.push(doc)
+    },
+    LOCK_SCROLL (state, y) {
+      state.scrollLock = y
+    },
+    UNLOCK_SCROLL (state) {
+      state.scrollLock = 0
     }
   },
   actions: {
