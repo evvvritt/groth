@@ -5,6 +5,8 @@
       leaf(:data="slice")
     //- line
     .absolute.z-30.top-0.h-full(v-show="direction", style="width:1px; background: #555", :style="lineStyle")
+    //- pan-x scroll-lock swipe area
+    .absolute.z-40.w-full.left-0(style="height:60%;top:40%; touch-action: pan-x", @touchstart.stop="onTouchStart", @touchmove.stop="onTouchMove", @touchend.stop="onTouchEnd")
 </template>
 
 <script>
