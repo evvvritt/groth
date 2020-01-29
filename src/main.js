@@ -5,13 +5,14 @@ import store from './store'
 import PrismicVue from 'prismic-vue'
 import linkResolver from './prismic-link-resolver'
 import './plugins/include-base-components'
+import Vue2TouchEvents from 'vue2-touch-events'
 
 Vue.use(PrismicVue, {
   endpoint: window.prismic.endpoint,
   linkResolver
 })
 
-Vue.config.productionTip = false
+Vue.use(Vue2TouchEvents)
 
 new Vue({
   router,

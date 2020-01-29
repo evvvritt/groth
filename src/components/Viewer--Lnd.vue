@@ -1,5 +1,5 @@
 <template lang="pug">
-  section.album-viewer.relative.flex.justify-between.bg-white.h-screen.overflow-hidden.lg-border-t.border-grey-darkest
+  section.album-viewer.relative.flex.justify-between.bg-white.h-screen.overflow-hidden.lg-border-t.border-grey-darkest(v-touch:swipe="onSwipe")
     //- divider
     //- .hidden.sm-block.h-screen.absolute.w-1x2.right-0.top-0.pointer-events-none.border-l.border-grey-lighter
     //- verso
@@ -66,9 +66,9 @@ export default {
     closeCaption () {
       this.caption = null
     },
-    onLeafClick (side = 'verso', event) {
+    onLeafClick (side = 'verso', event, isPrev) {
       if (this.caption) return this.closeCaption()
-      const prev = event && (event.x < this.$refs.recto.offsetWidth / 2)
+      const prev = isPrev || (event && (event.x < this.$refs.recto.offsetWidth / 2))
       this.next(side, prev)
     },
     getNextIndex (i, prev = false) {
@@ -104,6 +104,14 @@ export default {
         this.verso = newLeaf('leaf', null, 0) // set default
         this.next('verso')
       }
+    },
+    onSwipe (dir) {
+      if (dir === 'left' || dir === 'right') {
+        const prev = dir === 'right'
+        this.onLeafClick('recto', null, prev)
+        // ipad landscape
+        if (this.verso) this.onLeafClick('verso', null, prev)
+      }
     }
   },
   created () {
@@ -119,8 +127,8 @@ export default {
 </script>
 
 <style>
-.leaf-leave-active{transition:opacity 300ms;}
-.leaf-enter-active{transition:opacity 300ms 100ms;}
+.leaf-leave-active{transition:opacity 250ms;}
+.leaf-enter-active{transition:opacity 250ms 100ms;}
 .leaf-enter, .leaf-leave-to{opacity:0;}
 </style>
 
