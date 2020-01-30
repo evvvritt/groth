@@ -11,7 +11,7 @@
         leaf-caption.absolute.w-full.z-10.top-0.left-0.h-50vh.sm-h-screen.translx-100.bg-black(v-if="caption === 'verso'", :leaf="verso.data.primary", @close="closeCaption")
       //- caption toggle
       nav.absolute.w-full.left-0.bottom-0.text-center.text-xs
-        button.p-6.inline-block.text-xs(@click.stop="caption = 'verso'", v-show="hasCaption('verso')") • • •
+        button.p-6.inline-block.text-xs.icon-elipsis-after(@click.stop="caption = 'verso'", v-show="hasCaption('verso')")
       //- pg number
       //- .absolute.p-6.left-0.bottom-0.text-xs {{verso.index + 1}}
     //- recto
@@ -23,7 +23,7 @@
         leaf-caption.absolute.w-full.z-10.top-0.left-0.h-50vh.lg-h-screen.bg-black(v-if="caption === 'recto'", :leaf="recto.data.primary", @close="closeCaption", :class="{'translx_-100': !isPortrait}")
       //- caption toggle
       nav.absolute.top-0.right-0.lg-w-full.lg-top-auto.lg-bottom-0.text-center.text-xs
-        button.p-6.inline-block.text-xs(@click.stop="caption = 'recto'", v-show="hasCaption('recto')") • • •
+        button.p-6.inline-block.text-xs.icon-elipsis-after(@click.stop="caption = 'recto'", v-show="hasCaption('recto')")
       //- pg number
       //- .absolute.p-8.sm-p-6.right-0.bottom-0.w-full.lg-w-auto.text-xs.text-center
         span {{recto.index + 1}}
@@ -145,5 +145,14 @@ export default {
       opacity: 1;
     }
   }
+}
+.icon-elipsis-after:after{
+  content: '';
+  display: inline-block;
+  font-size:16px;
+  height:0.5em;
+  width:1.5em;
+  background-image:url('~@/assets/icon-bullet.svg');
+  background-size:auto 100%;
 }
 </style>
