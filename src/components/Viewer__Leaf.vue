@@ -29,13 +29,13 @@ export default {
     //   return 'url(' + this.image.url + ')'
     // },
     isBleed () {
-      return _get(this.data, 'primary.bleed') === 'true'
+      return _get(this.data, 'primary.format') === 'full-bleed'
     },
     bleedStyle () {
       if (!this.isBleed) return
       return {
         // backgroundImage: this.bgImg,
-        backgroundPosition: this.$prismic.richTextAsPlain(this.data.primary.bgpos)
+        objectPosition: this.$prismic.richTextAsPlain(this.data.primary.bgpos)
       }
     },
     // imgStyle () {
