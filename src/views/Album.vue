@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import ViewerLnd from '@/components/Viewer--Lnd'
+import ViewerLnd from '@/components/Viewer--Prt'
 import Footnotes from '@/components/Footnotes'
 export default {
   name: 'Album',
