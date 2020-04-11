@@ -15,7 +15,7 @@
 <script>
 import Footnotes from '@/components/Footnotes'
 export default {
-  name: 'TextDoc',
+  name: 'Page',
   props: ['slug'],
   components: { Footnotes },
   data () {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Album from './views/Album.vue'
-import TextDoc from './views/Text.vue'
+import Page from './views/Page.vue'
 
 Vue.use(Router)
 
@@ -22,8 +22,8 @@ export default new Router({
     },
     {
       path: '/:slug',
-      name: 'text',
-      component: TextDoc,
+      name: 'page',
+      component: Page,
       props: true
     }
   ],
