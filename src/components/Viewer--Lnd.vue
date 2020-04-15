@@ -149,8 +149,8 @@ export default {
 </script>
 
 <style>
-.leaf-leave-active{transition:opacity 250ms;}
-.leaf-enter-active{transition:opacity 250ms 100ms;}
+.leaf-leave-active{transition:opacity 150ms;}
+.leaf-enter-active{transition:opacity 150ms 50ms;}
 .leaf-enter, .leaf-leave-to{opacity:0;}
 </style>
 

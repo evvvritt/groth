@@ -2,13 +2,13 @@
   article.page.text-white.lg-border-t.border-grey-darkest
     .flex
       //- .w--50
-      section.min-h-screen.lg-w-1x2.py-12.px-12.lg-py-16.lg-pl-16.lg-pr-24.lg-border-r.border-grey-darkest.flex.flex-col.justify-between
+      section.min-h-screen.lg-w-1x2.py-12.px-6.sm-p-12.lg-py-12.lg-pl-12.lg-pr-24.lg-border-r.border-grey-darkest.flex.flex-col.justify-between
         template(v-if="doc")
           div
             //- main text
             prismic-rich-text.text__textbody.children-mt-1em.underline-links(v-for="(slice, i) in doc.body", :field="slice.primary.text1", :style="{maxWidth: '28em'}", :class="txtClss(slice, i)")
           //- footnotes
-          prismic-rich-text.text-xxs.children-mt-1em.mt-64.underline-links(v-if="doc.details", :field="doc.details")
+          prismic-rich-text.text-xxs.w-full.text-left.children-mt-1em.mt-40.sm-mt-48(v-if="doc.details", :field="doc.details")
     footer
       footnotes(:notes="doc.footnotes", :homelink="true", v-if="doc")
 </template>
@@ -33,7 +33,7 @@ export default {
       const sz = slice.primary.font_size
       return {
         'md-text-lg': sz === 'default',
-        'md-text-xs': sz === 'small',
+        'text-xs': sz === 'small',
         'mt-28': i
       }
     }
