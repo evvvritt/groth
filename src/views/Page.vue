@@ -49,8 +49,8 @@ export default {
 
 .text-white{
   & ::selection {
-    background:rgba(255,255,255); /* WebKit/Blink Browsers */
-    color: yellow;
+    background:rgba(255,255,255, .99); /* WebKit/Blink Browsers */
+    color: black;
   }
 }
 
