@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Violet Sans';
-  src: url('~@/assets/fonts/violet-sans/VioletSans-Regular.woff2') format('woff2'),
-       url('~@/assets/fonts/violet-sans/VioletSans-Regular.woff') format('woff');
+  src: url('/fonts/violet-sans/VioletSans-Regular.woff2') format('woff2'),
+       url('/fonts/violet-sans/VioletSans-Regular.woff') format('woff');
   font-weight: 400;
 }
