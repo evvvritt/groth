@@ -66,7 +66,7 @@ export default {
     },
     closeCaption () {
       this.caption = null
-      this.play()
+      // this.play()
     },
     onLeafClick (side = 'verso', event, isPrev) {
       // exit captions ?
@@ -74,7 +74,7 @@ export default {
       // next/prev
       const prev = isPrev || (event && (event.x < this.$refs.recto.offsetWidth / 2))
       this.next(side, prev)
-      this.play()
+      this.pause() // this.play(8000)
     },
     openCaption (side) {
       this.pause()
