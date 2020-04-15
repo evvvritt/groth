@@ -1,12 +1,13 @@
 <template lang="pug">
-  article.text-white.lg-border-t.border-grey-darkest
-    .flex.items-center.justify-between
+  article.page.text-white.lg-border-t.border-grey-darkest
+    .flex
       //- .w--50
       section.min-h-screen.lg-w-1x2.py-12.px-12.lg-py-16.lg-pl-16.lg-pr-24.lg-border-r.border-grey-darkest.flex.flex-col.justify-between
         template(v-if="doc")
-          //- main text
-          prismic-rich-text.md-text-lg.text__textbody.children-mt-1em.underline-links(:field="doc.text", style="max-width:26em")
-          //- details
+          div
+            //- main text
+            prismic-rich-text.text__textbody.children-mt-1em.underline-links(v-for="(slice, i) in doc.body", :field="slice.primary.text1", :style="{maxWidth: '28em'}", :class="txtClss(slice, i)")
+          //- footnotes
           prismic-rich-text.text-xxs.children-mt-1em.mt-64.underline-links(v-if="doc.details", :field="doc.details")
     footer
       footnotes(:notes="doc.footnotes", :homelink="true", v-if="doc")
@@ -27,6 +28,14 @@ export default {
     getDoc () {
       this.$prismic.client.getByUID('text', this.slug)
         .then(doc => { this.doc = doc && doc.data })
+    },
+    txtClss (slice, i) {
+      const sz = slice.primary.font_size
+      return {
+        'md-text-lg': sz === 'default',
+        'md-text-xs': sz === 'small',
+        'mt-28': i
+      }
     }
   },
   created () {
@@ -37,10 +46,18 @@ export default {
 
 <style scoped>
 @import '../style/_settings';
+
+.text-white{
+  & ::selection {
+    background:rgba(255,255,255); /* WebKit/Blink Browsers */
+    color: yellow;
+  }
+}
+
 .text__textbody{
   & >>> h6 {
-    margin-top: 3.5em;
-    font-size:0.66em;
+    /*margin-top: 4em;*/
+    /*font-size:0.66em;*/
     & + p {
       margin-top: 0.5em;
     }
@@ -50,15 +67,15 @@ export default {
   }
   & >>> a{
     /*font-style: bolder;*/
-    padding-bottom: 1px;
+    /*padding-bottom: 1px;*/
     /*border-bottom: 1px dotted var(--grey-darkest);*/
-    &:not([href^="/"])::after{
+    /*&:not([href^="/"])::after{
       content: ' \2197\fe0e';
       font-size:0.75em;
     }
     &[href$=".pdf"]:after{
       content: none;
-    }
+    }*/
   }
 }
 </style>

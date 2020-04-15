@@ -25,12 +25,26 @@ module.exports = {
       '16': '4rem',
       '20': '5rem',
       '24': '6rem',
+      '28': '7rem',
       '32': '8rem',
       '40': '10rem',
       '48': '12rem',
       '56': '14rem',
       '64': '16rem',
       '5vmx': '5vmax'
+    },
+    fontSize: {
+      xxs: '0.66em',
+      xs: '0.8em',
+      sm: '0.875em',
+      base: '1em',
+      lg: '1.125em',
+      xl: '1.25em',
+      '2xl': '1.5em',
+      '3xl': '1.875em',
+      '4xl': '2.25em',
+      '5xl': '3em',
+      '6xl': '4em'
     },
     colors: {
       'transparent': 'transparent',
@@ -44,7 +58,8 @@ module.exports = {
       'grey-light': '#dae1e7',
       'grey-lighter': '#f1f5f8',
       'grey-lightest': '#f8fafc',
-      'white': '#ffffff'
+      'white': '#ffffff',
+      'off-white': 'rgb(250,250,250)'
     },
     backgroundColor: theme => theme('colors'),
     backgroundPosition: {
@@ -148,19 +163,6 @@ module.exports = {
         '"Courier New"',
         'monospace'
       ]
-    },
-    fontSize: {
-      xxs: '0.66em',
-      xs: '0.75em',
-      sm: '0.875em',
-      base: '1em',
-      lg: '1.125em',
-      xl: '1.25em',
-      '2xl': '1.5em',
-      '3xl': '1.875em',
-      '4xl': '2.25em',
-      '5xl': '3em',
-      '6xl': '4em'
     },
     fontWeight: {
       hairline: '100',

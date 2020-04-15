@@ -1,5 +1,5 @@
 <template lang="pug">
-  section.album-viewer.relative.flex.justify-between.bg-white.h-screen.overflow-hidden.lg-border-t.border-grey-darkest(v-touch:swipe="onSwipe")
+  section.album-viewer.relative.flex.justify-between.bg-off-white.h-screen.overflow-hidden.lg-border-t.border-grey-darkest.cursor-pointer(v-touch:swipe="onSwipe")
     //- divider
     //- .hidden.sm-block.h-screen.absolute.w-1x2.right-0.top-0.pointer-events-none.border-l.border-grey-lighter
     //- verso
