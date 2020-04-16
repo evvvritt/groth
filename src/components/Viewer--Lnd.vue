@@ -2,8 +2,9 @@
   section.album-viewer.relative.flex.justify-between.bg-off-white.h-screen.overflow-hidden.lg-border-t.border-grey-darkest.cursor-pointer(v-touch:swipe="onSwipe")
     //- divider
     //- .hidden.sm-block.h-screen.absolute.w-1x2.right-0.top-0.pointer-events-none.border-l.border-grey-lighter
-    //- verso
-    figure.h-screen.relative.hidden.sm-block(v-if="verso && !isPortrait")
+
+    //- VERSO
+    figure.h-screen.relative.hidden.md-block(v-if="verso")
       transition(name="leaf")
         component(:is="verso.type", :data="verso.data", :key="verso.index", @click="onLeafClick('verso')")
       //- caption
@@ -14,6 +15,7 @@
         button.p-6.inline-block.text-xs.icon-elipsis-after(@click.stop="openCaption('verso')", v-show="hasCaption('verso')")
       //- pg number
       //- .absolute.p-6.left-0.bottom-0.text-xs {{verso.index + 1}}
+
     //- recto
     figure.h-screen.relative(v-if="recto", ref="recto")
       transition(name="leaf")
@@ -80,14 +82,11 @@ export default {
       this.pause()
       this.caption = side
     },
-    getNextIndex (i, prev = false) {
-      if (!this.isPortrait) return getRandomInt(0, this.slices.length)
-      // portrait mode:
-      if (prev) return i - 1 < 0 ? this.slices.length - 1 : i - 1// previous
-      return i + 1 === this.slices.length ? 0 : i + 1 // next
+    getNextIndex () {
+      return getRandomInt(0, this.slices.length)
     },
-    next (side, reverse) {
-      const index = this.getNextIndex(this[side].index, reverse)
+    next (side) {
+      const index = this.getNextIndex()
       const work = this.slices[index]
       const isActv = this.activeIndexes.includes(index)
       if (isActv) return this.next(side)
@@ -101,17 +100,12 @@ export default {
       }, 200)
     },
     setLeaves (intro) {
-      if (this.isPortrait) {
-        this.verso = null
-        // recto: set to first slice if empty or on title card (lnd > prt)
-        this.recto = !this.recto || this.recto.type === 'titleleaf' ? newLeaf('leaf', this.slices[0], 0) : this.recto
-      } else if (intro) {
+      if (intro && !this.isPortrait) {
         this.verso = newLeaf('titleleaf', { title: this.title, theme: 'black' }, -1)
         this.recto = newLeaf('titleleaf', { title: this.title, theme: 'black' }, -2)
       } else {
-        // window: portrait > landscape
-        this.verso = newLeaf('leaf', null, 0) // set default
         this.next('verso')
+        return !this.recto && this.next('recto')
       }
     },
     onSwipe (dir) {
