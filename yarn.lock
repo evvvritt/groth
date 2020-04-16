@@ -2373,7 +2373,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-cross-fetch@^2.2.0:
+cross-fetch@^2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-2.2.3.tgz#e8a0b3c54598136e037f8650f8e823ccdfac198e"
   integrity sha512-PrWWNH3yL2NYIb/7WF/5vFG3DCQiXDOVf8k3ijatbrtnwNuhMWLC7YF7uqf53tbTFDzHIUD8oITw4Bxt8ST3Nw==
@@ -6934,43 +6934,40 @@ pretty-hrtime@^1.0.3:
   resolved "https://registry.yarnpkg.com/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz#b7e3ea42435a4c9b2759d99e0f201eb195802ee1"
   integrity sha1-t+PqQkNaTJsnWdmeDyAesZWALuE=
 
-prismic-dom@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/prismic-dom/-/prismic-dom-2.1.0.tgz#a614d371e3895be454f06473ed3c3e59bf1340df"
-  integrity sha512-SHXaVYiGC0IehnnTjLXWMAG2FBPRsNpMU04iGI05ByLZRJR1P2PKegQL/BjpnfHpCuucdEZxvehqsOMwA/ZGvg==
+prismic-dom@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/prismic-dom/-/prismic-dom-2.2.3.tgz#803925eebe58a4dd147529f50b71c0853eb3d744"
+  integrity sha512-7jwRBbqkll9BPkS4QAQttRaENmAWR9s4PWGGmi7ifobs1J0kYDCrn8PxJ99cywQJQea0jWgAVzOfJhkMmIF8wQ==
   dependencies:
     escape-html "1.0.3"
-    prismic-helpers "^1.0.0"
-    prismic-richtext "^0.4.2"
+    prismic-helpers "^1.0.3"
+    prismic-richtext "^1.0.3"
 
-prismic-helpers@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/prismic-helpers/-/prismic-helpers-1.0.0.tgz#8337420cf187f55fb7b7a8be755523c8696fc329"
-  integrity sha1-gzdCDPGH9V+3t6i+dVUjyGlvwyk=
+prismic-helpers@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/prismic-helpers/-/prismic-helpers-1.0.3.tgz#cc1aa184f8791ed6b0a1775a9eb68a74a83f741e"
+  integrity sha512-eGCSflFwsWeXe7BdqWWGjjoaq1SPr61Y55xIUkgYumKFmfJsK9TVcSkRp0rdwW0hGnnDSRvjJwIo2kkDwG7KxA==
 
-prismic-javascript@^1.5.0:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/prismic-javascript/-/prismic-javascript-1.5.1.tgz#0f9da4e58a094ca0fb0b68e2e458e1a6c33a52ce"
-  integrity sha512-JAqbrjzE5nOXs0wy7GySMkiV91jk8j0jQS8c+OC2zsoi1UzG4CriETgXVEXGdmVPC1Iu7PVucWmVn5iGiFcF5A==
+prismic-javascript@^2.7.1:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/prismic-javascript/-/prismic-javascript-2.7.1.tgz#c009a6686a2410dcd49f3ccd537bcc40eb77dbca"
+  integrity sha512-4Mm2jBtQzjwN57est94wKFR6twvs3AhKx0BOR2IztUFyUEJhIp6iFHXNMQqTMP/q4cZ56hL0BtK5ecBkylNcyA==
   dependencies:
-    cross-fetch "^2.2.0"
+    cross-fetch "^2.2.3"
     promise-polyfill "8.0.0"
 
-prismic-richtext@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/prismic-richtext/-/prismic-richtext-0.4.2.tgz#bdc27d2c3d0e8e2226918b7ad2708fd3ac3d1e7f"
-  integrity sha512-+6frCZktVUHX+IA2a/s4EUukVvlLwjgdsJPRVkZmq/inaR1NVnjTHqM9l81QGEXAlTO5Jhzk0hhQBL1Pj73TYw==
+prismic-richtext@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/prismic-richtext/-/prismic-richtext-1.0.3.tgz#ce8c8c18d65b01f1036f222b993ad2de700199fe"
+  integrity sha512-ZM45dVPL713+oDpt8ysWRY2pw3esBxRrqBlUO+q/T0WK0SNVSq29tQYhVdIALd8hRfF7X1lfpW0Q0YymEdh0AA==
   dependencies:
-    ramda "^0.25.0"
-    uuid "^3.1.0"
+    ramda "^0.26.1"
+    uuid "^3.3.2"
 
-prismic-vue@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/prismic-vue/-/prismic-vue-1.3.0.tgz#ece80c332d2eeaabc56f8c0cb085dbba1ab5bb06"
-  integrity sha512-ByfCBBTZODUVBggb3Gx0Bwc9vxv2PNg4M4VD1QQuIJfIneLgTxE+Vey7w35LFXmtQ7Ikc1ZxdcV3AxQ3gbouDw==
-  dependencies:
-    prismic-dom "^2.1.0"
-    prismic-javascript "^1.5.0"
+prismic-vue@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/prismic-vue/-/prismic-vue-2.0.0.tgz#e2c26d70402d3bcc172054017f1c23b208c0192d"
+  integrity sha512-dg9CrpDEPbSCflMjbBHkU4jqGllRUqqYynqKJ8Mk3AtHUULfjEK4nQ2mZYQrFBMLOheh9lAv0/CCP4uHN7G7xw==
 
 private@^0.1.6:
   version "0.1.8"
@@ -7236,10 +7233,10 @@ querystringify@^2.1.1:
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.1.tgz#60e5a5fd64a7f8bfa4d2ab2ed6fdf4c85bad154e"
   integrity sha512-w7fLxIRCRT7U8Qu53jQnJyPkYZIaR4n5151KMfcJlO/A9397Wxb1amJvROTK6TOnp7PfoAmg/qXiNHI+08jRfA==
 
-ramda@^0.25.0:
-  version "0.25.0"
-  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.25.0.tgz#8fdf68231cffa90bc2f9460390a0cb74a29b29a9"
-  integrity sha512-GXpfrYVPwx3K7RQ6aYT8KPS8XViSXUVJT1ONhoKPE9VAleW42YE+U+8VEyGWt41EnEQW7gwecYJriTI0pKoecQ==
+ramda@^0.26.1:
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.26.1.tgz#8d41351eb8111c55353617fc3bbffad8e4d35d06"
+  integrity sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.0.6"
@@ -8785,7 +8782,7 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
-uuid@^3.0.1, uuid@^3.1.0, uuid@^3.3.2:
+uuid@^3.0.1, uuid@^3.3.2:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
   integrity sha512-pW0No1RGHgzlpHJO1nsVrHKpOEIxkGg1xB+v0ZmdNH5OAeAwzAVrCnI2/6Mtx+Uys6iaylxa+D3g4j63IKKjSQ==
