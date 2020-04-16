@@ -4,7 +4,7 @@
     //- .hidden.sm-block.h-screen.absolute.w-1x2.right-0.top-0.pointer-events-none.border-l.border-grey-lighter
 
     //- VERSO
-    figure.h-screen.relative.hidden.md-block(v-if="verso")
+    figure.h-screen.relative.hidden.sm-block(v-if="verso && !isPortrait")
       transition(name="leaf")
         component(:is="verso.type", :data="verso.data", :key="verso.index", @click="onLeafClick('verso')")
       //- caption
@@ -37,6 +37,7 @@ import leaf from './Viewer__Leaf'
 import leafCaption from './Viewer__Leaf__Caption'
 import { getRandomInt } from '@/utils'
 import _get from 'lodash/get'
+import _shuffle from 'lodash/shuffle'
 const newLeaf = (type, data, i) => { return { type: type, data: data, index: i } }
 export default {
   name: 'Viewer',
@@ -47,6 +48,7 @@ export default {
   },
   data () {
     return {
+      leaves: null,
       verso: null,
       recto: null,
       isPortrait: window.innerWidth < window.innerHeight,
@@ -74,7 +76,7 @@ export default {
       // exit captions ?
       if (this.caption) return this.closeCaption()
       // next/prev
-      const prev = isPrev || (event && (event.x < this.$refs.recto.offsetWidth / 2))
+      const prev = isPrev || (event && (event.x < this.$refs.recto.offsetWidth * 0.35))
       this.next(side, prev)
       this.pause() // this.play(8000)
     },
@@ -83,14 +85,24 @@ export default {
       this.caption = side
     },
     getNextIndex () {
-      return getRandomInt(0, this.slices.length)
+      return getRandomInt(0, this.leaves.length)
     },
-    next (side) {
-      const index = this.getNextIndex()
-      const work = this.slices[index]
-      const isActv = this.activeIndexes.includes(index)
-      if (isActv) return this.next(side)
-      this[side] = newLeaf('leaf', work, index)
+    next (side, reverse) {
+      if (this.isPortrait) {
+        // PORTRAIT - looped next/prev
+        let i = this[side].index
+        const ll = this.leaves.length
+        i = reverse ? i - 1 < 0 ? ll - 1 : i - 1 // prev
+          : i + 1 === ll ? 0 : i + 1 // next
+        this[side] = newLeaf('leaf', this.leaves[i], i)
+      } else {
+        // LANDSCAPE - random inactive slide
+        const index = this.getNextIndex()
+        const work = this.leaves[index]
+        const isActv = this.activeIndexes.includes(index)
+        if (isActv) return this.next(side)
+        this[side] = newLeaf('leaf', work, index)
+      }
     },
     onResize () {
       clearTimeout(this.afterResize)
@@ -100,12 +112,19 @@ export default {
       }, 200)
     },
     setLeaves (intro) {
-      if (intro && !this.isPortrait) {
+      this.leaves = this.leaves || _shuffle(this.slices)
+      if (this.isPortrait) {
+        // PORTRAIT: disable verso, set recto
+        this.verso = null
+        this.recto = this.recto || newLeaf('leaf', this.leaves[0], 0)
+      } else if (intro) {
+        // LND:INTRO - set title cards
         this.verso = newLeaf('titleleaf', { title: this.title, theme: 'black' }, -1)
         this.recto = newLeaf('titleleaf', { title: this.title, theme: 'black' }, -2)
       } else {
+        // PRT > LND - reset
         this.next('verso')
-        return !this.recto && this.next('recto')
+        this.next('recto')
       }
     },
     onSwipe (dir) {
