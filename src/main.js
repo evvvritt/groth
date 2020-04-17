@@ -9,7 +9,7 @@ import Vue2TouchEvents from 'vue2-touch-events'
 import VueGtag from 'vue-gtag'
 
 Vue.use(PrismicVue, {
-  endpoint: window.prismic.endpoint,
+  endpoint: process.env.VUE_APP_PRISMIC_API,
   linkResolver
 })
 
